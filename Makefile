@@ -1,8 +1,14 @@
 ######################################
 # target
 ######################################
+# this is all you should modify
 TARGET = csm32rv20
+TARGET_DEFS = 
+USER_SOURCES = \
+	src/main.c
 
+USER_INCLUDES = \
+  -Isrc
 
 ######################################
 # building variables
@@ -24,26 +30,26 @@ BUILD_DIR = build
 ######################################
 # C sources
 C_SOURCES = \
-drivers/src/adc.c \
-drivers/src/clic.c \
-drivers/src/cmu.c \
-drivers/src/comp.c \
-drivers/src/data_always.c \
-drivers/src/ee_printf.c \
-drivers/src/flash.c \
-drivers/src/gpio.c \
-drivers/src/i2c.c \
-drivers/src/iwdg.c \
-drivers/src/lowpower.c \
-drivers/src/lv.c \
-drivers/src/random.c \
-drivers/src/rtc.c \
-drivers/src/spi.c \
-drivers/src/timer.c \
-drivers/src/uart.c \
-drivers/src/usb.c \
-drivers/src/wup.c \
-src/main.c
+	drivers/src/adc.c \
+	drivers/src/clic.c \
+	drivers/src/cmu.c \
+	drivers/src/comp.c \
+	drivers/src/data_always.c \
+	drivers/src/ee_printf.c \
+	drivers/src/flash.c \
+	drivers/src/gpio.c \
+	drivers/src/i2c.c \
+	drivers/src/iwdg.c \
+	drivers/src/lowpower.c \
+	drivers/src/lv.c \
+	drivers/src/random.c \
+	drivers/src/rtc.c \
+	drivers/src/spi.c \
+	drivers/src/timer.c \
+	drivers/src/uart.c \
+	drivers/src/usb.c \
+	drivers/src/wup.c \
+	$(USER_SOURCES)
 
 # ASM sources
 ASM_SOURCES =  drivers/startup/vectors.S
@@ -78,13 +84,13 @@ AS_INCLUDES =
 
 # C includes
 C_INCLUDES =  \
--Idrivers/inc \
--Isrc
+	-Idrivers/inc \
+	$(USER_INCLUDES)
 
 # compile gcc flags
 ASFLAGS = $(MCU) $(AS_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
 
-CFLAGS = $(MCU) $(C_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
+CFLAGS = $(MCU) $(TARGET_DEFS) $(C_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
 
 ifeq ($(DEBUG), 1)
 CFLAGS += -g -gdwarf-2
@@ -139,15 +145,6 @@ $(BUILD_DIR)/%.bin: $(BUILD_DIR)/%.elf | $(BUILD_DIR)
 	
 $(BUILD_DIR):
 	mkdir $@		
-
-#######################################
-# Program
-#######################################
-program: $(BUILD_DIR)/$(TARGET).elf 
-	sudo wch-openocd -f /usr/share/wch-openocd/openocd/scripts/interface/wch-riscv.cfg -c 'init; halt; program $(BUILD_DIR)/$(TARGET).elf; reset; wlink_reset_resume; exit;'
-
-isp: $(BUILD_DIR)/$(TARGET).bin
-	wchisp flash $(BUILD_DIR)/$(TARGET).bin
 
 #######################################
 # clean up
