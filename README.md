@@ -8,7 +8,7 @@ This is CSM32RV20 firmware library v1.2.0 from Nanjing Zhongke Microelectronics.
 csm32rv20_firmware_library
 ├── config : a cjlink.cfg for OpenOCD, but not used
 ├── Devices : jlink related files
-├── datasheet : datasheet in Chinese, it seems no en datasheet provided.
+├── datasheet : datasheet in Chinese, no en datasheet provided.
 ├── drivers : firmware library sources
 ├── hardware : ref board
 ├── Makefile
