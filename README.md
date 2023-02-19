@@ -1,8 +1,8 @@
-# csm32rv20 firmware librayr
+# csm32rv20 firmware library
 
 This is CSM32RV20 firmware library v1.2.0 from Nanjing Zhongke Microelectronics.
 ```
-csm32rv20_sdk
+csm32rv20_firmware_library
 ├── config : a cjlink.cfg for OpenOCD, but not used
 ├── Devices : jlink related files
 ├── drivers : firmware library sources
