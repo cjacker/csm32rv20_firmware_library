@@ -27,4 +27,4 @@ There is also another project template provided in csmstudio for 'Shanghai WestB
 
 CSM32RV20 can be programmbed by JLink. 
 
-And according to the 'config/cjlink.cfg', it's a config file for a private forked OpenOCD. it seems they already have a workable forked OpenOCD to support their 'cjlink' debugger and csm flash, but not released in binary or source format.
+And the 'config/cjlink.cfg' is a config file for private forked OpenOCD. it seems they already have a workable forked OpenOCD to support their 'cjlink' debugger and csm flash driver, but not released in binary or source format.
