@@ -1,0 +1,7 @@
+   
+<DataBase>
+   <Device>
+   <ChipInfo Vendor="SiFive" Name="RISC-V" Core="JLINK_CORE_RISC_V" WorkRAMAddr="0x20020800" WorkRAMSize="0x00000800" />
+   <FlashBankInfo Name="Internal Flash" BaseAddr="0x20000000" MaxSize="0x0000A000" Loader="./Flashloader.elf" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1" />
+  </Device>
+</DataBase>
