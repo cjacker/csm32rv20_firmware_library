@@ -48,9 +48,9 @@ You have to use JLink now.
 
 type `make debug` to invoke JLinkGDBServer and open another terminal window to launch 'riscv-none-embed-gdb'.
 
-
+# Misc
+## about WB32F030
 There is also another firmware library provided in csmstudio for 'Shanghai WestBerry WB32F030', after diff with csm32rv20 firmware library, it's exactly identical, these two MCUs are same with different brand.
 
-CSM32RV20 can be programmbed by JLink. 
-
+## about cjlink
 And the 'Devices/cjlink.cfg' is a config file for private forked OpenOCD. it seems they already have a workable forked OpenOCD to support their 'cjlink' debugger and csm flash driver, and release a 'cjlink.exe' for windows, but not released in binary or source format for linux.
