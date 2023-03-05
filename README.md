@@ -35,6 +35,11 @@ It is extracted from csmstudio and with below changes:
 - tune dir structure, put vectors.S (triditional startup.S) to 'fw_lib/startup' dir.
 - add a 'Makefile', let it can be built.
 
+**NOTE :** `JLINK_ExecCommand("SetcJTAGInitMode = 1")` must be set in `csmflash.JLinkScript`, refer to "Short connect sequence' section of https://wiki.segger.com/J-Link_cJTAG_specifics :
+
+> By default, J-Link will use the standard connect sequence. 
+> In order to make J-Link to use the short one instead, a command string needs to be executed before connecting to the device: "SetcJTAGInitMode = 1". 
+
 # Build
 type `make` to build.
 
