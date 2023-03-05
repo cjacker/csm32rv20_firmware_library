@@ -1,0 +1,4 @@
+#include "headfile.h"
+
+
+void I2C_Init_case1(void)//闈炰腑鏂ā寮

@@ -1,0 +1,4 @@
+#include "headfile.h"
+
+
+void RTC_Init_case1(void)//16鍒嗛锛岃鏁

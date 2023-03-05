@@ -1,3 +1,8 @@
+/*
+    \file    main.c
+    \brief   main function for test demo
+    \version V1.7, 2022-11-07, firmware for CSM32RV20
+*/
 #include "headfile.h"
 
 
@@ -16,9 +21,9 @@ int main(void)
     //LowPower_Config_case2();//所有IO设置为输入，上拉
 
     //使用外部中断唤醒
-    //GPIO_EXIT_Init_case1(GPIOA, PIN2);//检测高电平
-    //Interrupt_Level(EXIT2_int_ID, INT_LEVEL0);//CLIC设置中断抢占级别
-    //Interrupt_Enable(EXIT2_int_ID);//CLIC使能EXIT中断
+    //GPIO_EXTI_Init_case1(GPIOA, PIN2);//检测高电平
+    //Interrupt_Level(EXTI2_int_ID, INT_LEVEL0);//CLIC设置中断抢占级别
+    //Interrupt_Enable(EXTI2_int_ID);//CLIC使能EXTI中断
     //SYS_Interrupt_Enable();//CLIC开总中断
 
     //配置不同低功耗模式
@@ -48,14 +53,14 @@ int main(void)
         Delay32M_ms(100);
     }
 
-    ///---- Chapter 6 EXIT Test Init -------------------------------------------------------------------------------------
-    //GPIO_EXIT_Init_case1(GPIOA, PIN2);//检测高电平
-    //GPIO_EXIT_Init_case2(GPIOA, PIN2);//检测低电平
-    //GPIO_EXIT_Init_case3(GPIOA, PIN2);//检测上升沿
-    //GPIO_EXIT_Init_case4(GPIOA, PIN2);//检测下降沿
+    ///---- Chapter 6 EXTI Test Init -------------------------------------------------------------------------------------
+    //GPIO_EXTI_Init_case1(GPIOA, PIN2);//检测高电平
+    //GPIO_EXTI_Init_case2(GPIOA, PIN2);//检测低电平
+    //GPIO_EXTI_Init_case3(GPIOA, PIN2);//检测上升沿
+    //GPIO_EXTI_Init_case4(GPIOA, PIN2);//检测下降沿
 
-    //Interrupt_Level(EXIT2_int_ID, INT_LEVEL0);//CLIC设置中断抢占级别
-    //Interrupt_Enable(EXIT2_int_ID);//CLIC使能EXIT中断
+    //Interrupt_Level(EXTI2_int_ID, INT_LEVEL0);//CLIC设置中断抢占级别
+    //Interrupt_Enable(EXTI2_int_ID);//CLIC使能EXTI中断
 
     //载波检测中断
     //CAW_Init();//载波检测
@@ -113,13 +118,22 @@ int main(void)
     //SYS_Interrupt_Enable();//CLIC开总中断
 
     ///---- Chapter 10 WUP Test Init -------------------------------------------------------------------------------------
+    /*
+    System_Clock_Init2();//系统时钟初始化
+    uint32_t cfg2_temp;
+    cfg2_temp = ANA->CFG2;
+    if((cfg2_temp==0)||(cfg2_temp==0xffffffff))
+    {
+        cfg2_temp = 0x8000da26;
+    }
+
     //GPIO_MODE_Init(GPIOA,PIN2,GPIO_MODE_OUTPUT);
     //GPIO_MODE_Init(GPIOA,PIN3,GPIO_MODE_OUTPUT);
 
-    //WUP_Init_case1(9000);//设置中断周期,使能WUP中断
-    //Interrupt_Enable(WUP_int_ID);//CLIC使能中断
-    //SYS_Interrupt_Enable();//CLIC开总中断
-
+    WUP_Init_case1(3000);//设置中断周期,使能WUP中断
+    Interrupt_Enable(WUP_int_ID);//CLIC使能中断
+    SYS_Interrupt_Enable();//CLIC开总中断
+    */
     //配置不同低功耗模式
     //System_Halt();//待机模式 halt1
     //System_Sleep();//睡眠模式 halt2
@@ -223,14 +237,18 @@ int main(void)
 
 	while(1)
 	{
-        Delay32M_ms(500);
+
+        Delay32M_ms(100);
         //Delay16M_ms(500);
         //Delay16M_us(500000);
         //GPIO_Toggle(GPIOA,PIN15);
         GPIO_Toggle(GPIOA,PIN8);
         //printf("main:\r\n");
 
-        ///---- Chapter 6 EXIT test ---------------------------------------------------------------------------------
+        ///---- Chapter 3 PMU test --------------------------------------------------------------
+        //
+
+        ///---- Chapter 6 EXTI test ---------------------------------------------------------------------------------
         //delay16M_ms(500);
         //GPIO_Toggle(GPIOA,PIN15);
 
@@ -275,6 +293,11 @@ int main(void)
         GPIO_Write(GPIOA,PIN9,GPIO_RESET);
         GPIO_Write(GPIOA,PIN11,GPIO_RESET);
         GPIO_Write(GPIOA,PIN13,GPIO_SET);
+        */
+
+        ///---- Chapter 10 WUP test --------------------------------------------------------------
+        /*
+	    System_Powerdown();//掉电模式 powerdown1
         */
 
         ///---- Chapter 11 ADC test ---------------------------------------------------------------------------------

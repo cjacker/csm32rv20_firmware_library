@@ -1,0 +1,2 @@
+loadfile build/csm32rv20.hex
+exit

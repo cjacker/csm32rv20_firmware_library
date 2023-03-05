@@ -5,6 +5,7 @@
 TARGET = csm32rv20
 TARGET_DEFS = 
 USER_SOURCES = \
+	src/sys_io.c \
 	src/main.c
 
 USER_INCLUDES = \
@@ -30,29 +31,29 @@ BUILD_DIR = build
 ######################################
 # C sources
 C_SOURCES = \
-	drivers/src/adc.c \
-	drivers/src/clic.c \
-	drivers/src/cmu.c \
-	drivers/src/comp.c \
-	drivers/src/data_always.c \
-	drivers/src/ee_printf.c \
-	drivers/src/flash.c \
-	drivers/src/gpio.c \
-	drivers/src/i2c.c \
-	drivers/src/iwdg.c \
-	drivers/src/lowpower.c \
-	drivers/src/lv.c \
-	drivers/src/random.c \
-	drivers/src/rtc.c \
-	drivers/src/spi.c \
-	drivers/src/timer.c \
-	drivers/src/uart.c \
-	drivers/src/usb.c \
-	drivers/src/wup.c \
+	fw_lib/drivers/Src/data_always.c \
+	fw_lib/drivers/Src/comp.c \
+	fw_lib/drivers/Src/timer.c \
+	fw_lib/drivers/Src/i2c.c \
+	fw_lib/drivers/Src/cmu.c \
+	fw_lib/drivers/Src/adc.c \
+	fw_lib/drivers/Src/wup.c \
+	fw_lib/drivers/Src/lv.c \
+	fw_lib/drivers/Src/spi.c \
+	fw_lib/drivers/Src/iwdg.c \
+	fw_lib/drivers/Src/ee_printf.c \
+	fw_lib/drivers/Src/usb.c \
+	fw_lib/drivers/Src/lowpower.c \
+	fw_lib/drivers/Src/uart.c \
+	fw_lib/drivers/Src/random.c \
+	fw_lib/drivers/Src/flash.c \
+	fw_lib/drivers/Src/rtc.c \
+	fw_lib/drivers/Src/gpio.c \
+	fw_lib/drivers/Src/clic.c \
 	$(USER_SOURCES)
 
 # ASM sources
-ASM_SOURCES =  drivers/startup/vectors.S
+ASM_SOURCES =  fw_lib/startup/vectors.S
 
 #######################################
 # binaries
@@ -84,7 +85,7 @@ AS_INCLUDES =
 
 # C includes
 C_INCLUDES =  \
-	-Idrivers/inc \
+	-Ifw_lib/drivers/Inc \
 	$(USER_INCLUDES)
 
 # compile gcc flags
@@ -105,7 +106,7 @@ CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)"
 # LDFLAGS
 #######################################
 # link script
-LDSCRIPT = drivers/ld/target.ld
+LDSCRIPT = fw_lib/ld/target.ld
 
 # libraries
 LIBS = -lc -lm -lnosys
@@ -146,6 +147,18 @@ $(BUILD_DIR)/%.bin: $(BUILD_DIR)/%.elf | $(BUILD_DIR)
 $(BUILD_DIR):
 	mkdir $@		
 
+#######################################
+# program 
+#######################################
+flash: $(BUILD_DIR)/$(TARGET).hex
+	./import-csm-jflash
+	JLinkExe -device csm32rv20 -if cJTAG -speed 4000 -jtagconf -1,-1 -JLinkScriptFile ./Devices/csmflash.JLinkScript -autoconnect 1 -nogui 1 -commandfile flash.jlink
+#######################################
+# debug 
+#######################################
+debug: $(BUILD_DIR)/$(TARGET).hex
+	@echo "Open another window to launch gdb"
+	JLinkGDBServerCLExe -select USB -device csm32rv20 -endian little  -timeout 4000 -novd -if cJTAG -s -speed 4000 -ir -LocalhostOnly  -JLinkDevicesXMLPath $(shell pwd)/Devices/ -jlinkscriptfile $(shell pwd)/Devices/csmflash.JLinkScript
 #######################################
 # clean up
 #######################################

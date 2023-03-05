@@ -1,0 +1,13 @@
+#include "headfile.h"
+
+
+
+uint32_t JumpAddress;
+typedef void(*pFunction)(void);
+uint8_t (*my_flash_operation)(uint8_t code,uint16_t addr,uint8_t *p,uint16_t num,uint8_t clk);//flash 虏脵脳梅潞炉脢媒脭颅脨脥
+
+
+
+void NVR_RW_Test(void)
+{
+    //娉ㄦ剰鍓嶅悗涓柇閰嶇疆锛侊紒锛

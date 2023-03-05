@@ -1,0 +1,17 @@
+#include "headfile.h"
+
+
+uint8_t U1_outbuf[ULEN];
+volatile uint8_t U1_outstart;
+volatile uint8_t U1_outend;
+volatile uint8_t U1_outactive;
+
+
+uint8_t U1_inbuf[ULEN];
+volatile uint8_t U1_instart;
+volatile uint8_t U1_inend;
+
+
+
+
+void UART_Init_case1(UART_TypeDef *UARTx) //闈炰腑鏂ā寮

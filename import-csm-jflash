@@ -1,0 +1,5 @@
+#!/bin/bash
+rm -rf $HOME/.config/SEGGER/JLinkDevices/CSM/csm32rv20
+mkdir -p $HOME/.config/SEGGER/JLinkDevices/CSM/csm32rv20
+cp -r Devices/Flashloader.elf $HOME/.config/SEGGER/JLinkDevices/CSM/csm32rv20
+cp -r Devices/JLinkDevices.xml $HOME/.config/SEGGER/JLinkDevices/CSM/csm32rv20

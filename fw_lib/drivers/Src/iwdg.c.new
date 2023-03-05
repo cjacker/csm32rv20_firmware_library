@@ -1,0 +1,3 @@
+#include "headfile.h"
+
+void IWDG_Init(uint16_t count)//閰嶇疆鐪嬮棬鐙楄鏁板
