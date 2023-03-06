@@ -4,6 +4,9 @@ CSM32RV20 is a RISCV MCU made by Nanjing Zhongke Micro. it's 32MHz RISC-V RV32IM
 
 This is CSM32RV20 firmware library v1.7.0 from Nanjing Zhongke Microelectronics.
 
+For a complete toolchain tutorial, refer to https://github.com/cjacker/opensource-toolchain-csm32rv20.
+
+# Dir structure
 ```
 csm32rv20_firmware_library
 ├── datasheet
